@@ -1,6 +1,9 @@
 # Use Node.js base image
 FROM node:18
 
+# Install ping utility
+RUN apt-get update && apt-get install -y iputils-ping
+
 # Set working directory
 WORKDIR /app
 
