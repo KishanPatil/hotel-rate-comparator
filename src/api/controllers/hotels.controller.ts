@@ -6,7 +6,10 @@ export const getComparedHotels = async (req: Request, res: Response) => {
     if (!city) return res.status(400).json({ error: 'city query param is required' });
 
     try {
-        const connection = await Connection.connect(); // connect to Temporal server
+
+        const connection = await Connection.connect({
+            address: 'temporal:7233',
+        });
         const client = new Client({ connection });
 
         const result = await client.workflow.execute('hotelComparisonWorkflow', {
